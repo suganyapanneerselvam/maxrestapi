@@ -1,8 +1,10 @@
 POST http://localhost:8080/events
 Content-type: application/json
 
-{
-  "title": "Meeting with Team",
+{"name": "Team Meeting",
+  "title": "Team Meeting",
   "description": "Discuss project updates",
-  "date": "2024-07-01T10:00:00Z"
+  "location": "Conference Room",
+  "dateTime": "2024-07-01T10:00:00Z",
+  "userId": 3
 }
