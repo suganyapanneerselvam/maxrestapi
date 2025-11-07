@@ -4,5 +4,6 @@ Content-Type: application/json
 {
   "name": "Coffee with DD",
   "date": "2024-07-20T10:00:00Z",
-  "location": "Updated Location"
+  "location": "Hyderabad Cafe",
+  "description": "Discussing project updates over coffee."
 }

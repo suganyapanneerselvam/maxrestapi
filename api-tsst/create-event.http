@@ -1,10 +1,11 @@
 POST http://localhost:8080/events
 Content-type: application/json
 
-{"name": "Team Meeting",
-  "title": "Team Meeting",
-  "description": "Discuss project updates",
+{"id":3,
+  "name": "Google Meet",
+  "title": "Google Meet Project Discussion",
+  "description": "Discuss project goals and deliverables",
   "location": "Conference Room",
   "dateTime": "2024-07-01T10:00:00Z",
-  "userId": 3
+  "userId": 2
 }

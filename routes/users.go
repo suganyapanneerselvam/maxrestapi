@@ -3,38 +3,54 @@ package routes
 import (
 	"net/http"
 	"practice/restapi/models"
-	
+	"practice/restapi/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
-func signup(c *gin.Context) {
+func signup(context *gin.Context) {
 	var user models.User
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+
+	err := context.ShouldBindJSON(&user)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data."})
 		return
 	}
 
-	if err := user.Save(); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	err = user.Save()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not save user."})
 		return
 	}
 
-	c.JSON(http.StatusCreated, user)
+	context.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
 }
-func login(c *gin.Context){
-var user models.User
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "could not parse requst data"})
-		return
-	}
-	err:=user.ValidateCredentails()
-	
 
-	if  err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not auth"})
+func login(context *gin.Context) {
+	var user models.User
+
+	err := context.ShouldBindJSON(&user)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Could not parse request data."})
 		return
 	}
 
-	c.JSON(http.StatusCreated, user)
+	err = user.ValidateCredentials()
+
+	if err != nil {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Could not authenticate user."})
+		return
+	}
+
+	token, err := utils.GenerateToken(user.Email, user.ID)
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not authenticate user."})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"message": "Login successful!", "token": token})
 }
