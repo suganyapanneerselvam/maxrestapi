@@ -2,9 +2,10 @@ package models
 
 import (
 	"errors"
+
 	"practice/restapi/api-tsst/db"
 	"practice/restapi/utils"
-) 
+)
 
 type User struct {
 	ID       int64
@@ -40,7 +41,7 @@ func (u User) Save() error {
 	return err
 }
 
-func (u User) ValidateCredentials() error {
+func (u *User) ValidateCredentials() error {
 	query := "SELECT id, password FROM users WHERE email = ?"
 	row := db.DB.QueryRow(query, u.Email)
 
@@ -48,13 +49,13 @@ func (u User) ValidateCredentials() error {
 	err := row.Scan(&u.ID, &retrievedPassword)
 
 	if err != nil {
-		return errors.New("credentials invalid")
+		return errors.New("Credentials invalid")
 	}
 
 	passwordIsValid := utils.CheckPasswordHash(u.Password, retrievedPassword)
 
 	if !passwordIsValid {
-		return errors.New("credentials invalid")
+		return errors.New("Credentials invalid")
 	}
 
 	return nil
