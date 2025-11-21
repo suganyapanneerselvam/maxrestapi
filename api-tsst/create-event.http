@@ -1,11 +1,10 @@
 POST http://localhost:8080/events
-Content-type: application/json
+content-type: application/json
+authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkVuaXlhQGV4YW1wbGUuY29tIiwiZXhwIjoxNzYyNzYxMDM0LCJ1c2VySWQiOjd9.ib6Hs0Gx151pPUTQky4pkRkRmxR8zAVPXqdcAkFejOQ 
 
-{"id":3,
-  "name": "Google Meet",
-  "title": "Google Meet Project Discussion",
-  "description": "Discuss project goals and deliverables",
-  "location": "Conference Room",
-  "dateTime": "2024-07-01T10:00:00Z",
-  "userId": 2
+{
+  "Name": "Test event 2",
+  "Description": "Another test event",
+  "Location": "A test location",
+  "DateTime": "2025-01-01T15:30:00.000Z"
 }

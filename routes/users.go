@@ -2,9 +2,9 @@ package routes
 
 import (
 	"net/http"
+
 	"practice/restapi/models"
 	"practice/restapi/utils"
-
 	"github.com/gin-gonic/gin"
 )
 
